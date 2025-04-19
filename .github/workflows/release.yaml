@@ -12,7 +12,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-        GO_VERSION: 1.23.5
+        GO_VERSION: 1.24
     strategy:
       matrix:
         goos: [linux, darwin]
@@ -48,7 +48,7 @@ jobs:
           GOOS: ${{ matrix.goos }}
           GOARCH: ${{ matrix.goarch }}
         run: |
-          xcaddy build --with github.com/caddyserver/cache-handler --with github.com/ueffel/caddy-brotli --with github.com/caddyserver/transform-encoder --with github.com/WJQSERVER/caddy-ext/ratelimit@2412182247 --with github.com/caddy-dns/cloudflare
+          xcaddy build --with github.com/caddyserver/cache-handler --with github.com/ueffel/caddy-brotli --with github.com/caddyserver/transform-encoder --with github.com/WJQSERVER/caddy-ext/ratelimit --with github.com/caddy-dns/cloudflare@master
           tar -czvf caddy-${{ matrix.goos }}-${{ matrix.goarch }}.tar.gz caddy
           tar -I 'zstd -15' -cf caddy-${{ matrix.goos }}-${{ matrix.goarch }}.tar.zst caddy
           
@@ -57,7 +57,7 @@ jobs:
           GOOS: ${{ matrix.goos }}
           GOARCH: ${{ matrix.goarch }}
         run: |
-          xcaddy build --with github.com/caddyserver/cache-handler --with github.com/ueffel/caddy-brotli --with github.com/caddyserver/transform-encoder --with github.com/WJQSERVER/caddy-ext/ratelimit@2412182247 --with github.com/caddy-dns/cloudflare --with github.com/mholt/caddy-l4
+          xcaddy build --with github.com/caddyserver/cache-handler --with github.com/ueffel/caddy-brotli --with github.com/caddyserver/transform-encoder --with github.com/WJQSERVER/caddy-ext/ratelimit --with github.com/caddy-dns/cloudflare@master --with github.com/mholt/caddy-l4
           tar -czvf caddy-${{ matrix.goos }}-${{ matrix.goarch }}-l4.tar.gz caddy
           tar -I 'zstd -15' -cf caddy-${{ matrix.goos }}-${{ matrix.goarch }}-l4.tar.zst caddy
   
